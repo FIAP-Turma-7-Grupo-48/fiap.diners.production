@@ -26,11 +26,6 @@ public class OrderUseCase : IOrderUseCase
         CancellationToken cancellationToken)
     {
 
-        if (_notificationContext.HasErrors)
-        {
-            return null;
-        }
-
         var orderProduct = orderCreateRequest.OrderProducts.ToOrderProduct();
 
 
@@ -112,7 +107,7 @@ public class OrderUseCase : IOrderUseCase
         };
         var order = await _orderRepository.ListAsync(status, page, limit, cancellationToken);
 
-        order = order.OrderByDescending(x => x.Status).ThenBy(x => x.CreatedDate);
+        order = order.OrderByDescending(x => x.Status).ThenBy(x => x.Created);
         return order;
 
     }

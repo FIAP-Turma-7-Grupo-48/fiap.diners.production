@@ -5,7 +5,6 @@ namespace Domain.Entities.OrderAggregate;
 
 public class OrderProduct
 {
-    public int OrderId { get; init; }
     public int Quantity { get; init; }
     
     private readonly string _name = string.Empty;

@@ -11,10 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Controller\Controller.csproj" />
-    <ProjectReference Include="..\src\Domain\Domain.csproj" />
-    <ProjectReference Include="..\src\Helpers\Helpers.csproj" />
-    <ProjectReference Include="..\src\UseCase\UseCase.csproj" />
+    <ProjectReference Include="..\Controller\Controller.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\UseCase\UseCase.csproj" />
   </ItemGroup>
 
 </Project>

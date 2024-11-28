@@ -6,17 +6,24 @@ namespace Domain.Entities.OrderAggregate;
 
 public class Order : IAggregateRoot
 {
-    public Order() { 
-        CreatedDate = DateTime.Now;
+    public Order()
+    {
+        
+    }
+    public Order(string id, DateTime created, OrderStatus status) 
+    { 
+        Id = id;
+        Created = created;
+        Status = status;
     }
 
-    public string Id { get; init; } 
+    public string Id { get; private init; } 
     public int ExternalOrderId { get; init; }
 
     public OrderStatus Status { get; private set; } = OrderStatus.Received;
 
     public required IEnumerable<OrderProduct> OrderProducts { get; init; }
-    public DateTime? CreatedDate { get; private init; }
+    public DateTime? Created { get; private init; }
 
     public Order ChangeStatusToPreparing()
     {

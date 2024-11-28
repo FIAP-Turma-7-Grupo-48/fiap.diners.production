@@ -1,12 +1,12 @@
-
-using System.Text.Json.Serialization;
 using Api.Extensions;
 using Api.Filters;
 using Api.Middlewares;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddControllers(options =>
 {
@@ -16,17 +16,17 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddUseCase();
+builder.Services.AddInfrastructure();
 builder.Services.AddControllerLayerDI();
-
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
