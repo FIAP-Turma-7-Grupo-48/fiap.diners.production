@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fiap-diners-production-configmap
+  namespace: fiap-sa
+  labels:
+    app: fiap-diners-production-configmap
+data:
+  ASPNETCORE_ENVIRONMENT: "Development"
