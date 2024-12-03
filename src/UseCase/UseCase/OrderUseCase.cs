@@ -6,7 +6,7 @@ using UseCase.Dtos.OrderRequest;
 using UseCase.Dtos.OrderRequest.Extensions;
 using UseCase.Services.Interfaces;
 
-namespace UseCase.Services;
+namespace UseCase;
 
 public class OrderUseCase : IOrderUseCase
 {

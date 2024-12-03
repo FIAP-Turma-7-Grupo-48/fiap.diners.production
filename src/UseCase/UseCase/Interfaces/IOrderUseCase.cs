@@ -2,7 +2,7 @@
 using Domain.Entities.OrderAggregate;
 using UseCase.Dtos.OrderRequest;
 
-namespace UseCase.Services.Interfaces;
+namespace UseCase.Interfaces;
 
 public interface IOrderUseCase
 {

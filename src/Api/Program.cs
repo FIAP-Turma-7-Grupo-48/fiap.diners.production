@@ -1,6 +1,7 @@
 using Api.Extensions;
 using Api.Filters;
 using Api.Middlewares;
+using RabbitMQ.Client;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddUseCase();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllerLayerDI();
+AddRabbitMqConnectionFactory(builder.Services);
 
 var app = builder.Build();
 
@@ -37,3 +39,25 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+ IServiceCollection AddRabbitMqConnectionFactory(IServiceCollection services)
+{
+    var hostName = Environment.GetEnvironmentVariable("RabbitMqHostName");
+    var port = int.Parse(Environment.GetEnvironmentVariable("RabbitMqPort"));
+    var user = Environment.GetEnvironmentVariable("RabbitMqUserName");
+    var password = Environment.GetEnvironmentVariable("RabbitMqPassword");
+
+    return
+        services
+            .AddSingleton<IConnectionFactory>(
+                new ConnectionFactory()
+                {
+                    HostName = hostName,
+                    Port = port,
+                    UserName = user,
+                    Password = password
+                }
+            );
+}

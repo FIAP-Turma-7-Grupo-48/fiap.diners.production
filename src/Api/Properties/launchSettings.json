@@ -16,7 +16,13 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5048",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MongoConnectionString": "mongodb://sa:1234@localhost:27017/",
+        "MongoDatabaseName": "dinersProduction",
+        "RabbitMqHostName": "localhost",
+        "RabbitMqPort": 5672,
+        "RabbitMqUserName": "guest",
+        "RabbitMqPassword": "guest"
       }
     },
     "https": {

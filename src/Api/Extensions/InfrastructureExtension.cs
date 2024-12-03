@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Infrastructure.Context.Interfaces;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Interfaces;
+using MongoDB.Driver.Core.Configuration;
 
 namespace Api.Extensions;
 
@@ -20,8 +21,11 @@ public static class InfrastructureExtension
 
     private static IServiceCollection AddContext(this IServiceCollection services)
     {
+
+        var connectionString = Environment.GetEnvironmentVariable("MongoConnectionString");
+        var dbName = Environment.GetEnvironmentVariable("dinersPayment");
         return
-            services.AddSingleton<IMongoContext>(new MongoContext("mongodb://sa:1234@localhost:27017/", "dinersProduction"));
+            services.AddSingleton<IMongoContext>(new MongoContext(connectionString, dbName));
     }
 
     private static IServiceCollection AddRepository(this IServiceCollection services)
