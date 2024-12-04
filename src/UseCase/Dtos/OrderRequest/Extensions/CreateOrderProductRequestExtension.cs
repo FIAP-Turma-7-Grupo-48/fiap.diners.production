@@ -7,7 +7,6 @@ internal static class CreateOrderProductRequestExtension
     public static OrderProduct ToOrderProduct(this CreateOrderProductRequest request)
     {
         var response = new OrderProduct() { 
-            OrderId = request.OrderId,
             Name = request.Name,
             Quantity = request.Quantity,
             ProductType = request.productType
