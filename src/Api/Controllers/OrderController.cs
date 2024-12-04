@@ -56,7 +56,7 @@ public class OrderController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[HttpPatch]
 	[Route("{id}/status/Preparing")]
-	public async Task<IActionResult> UpdateStatusToPreparing(int id, CancellationToken cancellationToken)
+	public async Task<IActionResult> UpdateStatusToPreparing(string id, CancellationToken cancellationToken)
 	{
 		await _orderApplication.UpdateStatusToPreparing(id, cancellationToken);
 
@@ -67,7 +67,7 @@ public class OrderController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[HttpPatch]
 	[Route("{id}/status/done")]
-	public async Task<IActionResult> UpdateStatusToDone(int id, CancellationToken cancellationToken)
+	public async Task<IActionResult> UpdateStatusToDone(string id, CancellationToken cancellationToken)
 	{
 		await _orderApplication.UpdateStatusToDone(id, cancellationToken);
 
@@ -79,7 +79,7 @@ public class OrderController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[HttpPatch]
 	[Route("{id}/status/finished")]
-	public async Task<IActionResult> UpdateStatusToFinished(int id, CancellationToken cancellationToken)
+	public async Task<IActionResult> UpdateStatusToFinished(string id, CancellationToken cancellationToken)
 	{
 		await _orderApplication.UpdateStatusToFinished(id, cancellationToken);
 

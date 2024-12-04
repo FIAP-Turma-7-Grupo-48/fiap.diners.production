@@ -1,6 +1,6 @@
-using UseCase.Services;
-using UseCase.Services.Interfaces;
 using Core.Notifications;
+using UseCase;
+using UseCase.Interfaces;
 
 namespace Api.Extensions;
 

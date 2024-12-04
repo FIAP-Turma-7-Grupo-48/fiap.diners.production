@@ -41,7 +41,7 @@ public class OrderUseCase : IOrderUseCase
 
     }
 
-    public async Task UpdateStatusToPreparing(int orderId, CancellationToken cancellationToken)
+    public async Task UpdateStatusToPreparing(string orderId, CancellationToken cancellationToken)
     {
 
         var order = await _orderRepository.GetAsync(orderId, cancellationToken);
@@ -57,7 +57,7 @@ public class OrderUseCase : IOrderUseCase
 
         await _orderRepository.UpdateAsync(order, cancellationToken);
     }
-    public async Task UpdateStatusToDone(int orderId, CancellationToken cancellationToken)
+    public async Task UpdateStatusToDone(string orderId, CancellationToken cancellationToken)
     {
 
         var order = await _orderRepository.GetAsync(orderId, cancellationToken);
@@ -74,7 +74,7 @@ public class OrderUseCase : IOrderUseCase
         await _orderRepository.UpdateAsync(order, cancellationToken);
     }
 
-    public async Task UpdateStatusToFinished(int orderId, CancellationToken cancellationToken)
+    public async Task UpdateStatusToFinished(string orderId, CancellationToken cancellationToken)
     {
 
         var order = await _orderRepository.GetAsync(orderId, cancellationToken);

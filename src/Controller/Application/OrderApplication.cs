@@ -3,7 +3,8 @@ using Controller.Dtos.OrderResponse;
 using Controller.Extensions.OrderAggregate;
 using Domain.Entities.Enums;
 using UseCase.Dtos.OrderRequest;
-using UseCase.Services.Interfaces;
+using UseCase.Interfaces;
+
 
 namespace Controller.Application;
 
@@ -45,17 +46,17 @@ public class OrderApplication : IOrderApplication
 		};
 	}
 
-	public Task UpdateStatusToPreparing(int orderId, CancellationToken cancellationToken)
+	public Task UpdateStatusToPreparing(string orderId, CancellationToken cancellationToken)
 	{
 		return _orderUseCase.UpdateStatusToPreparing(orderId, cancellationToken);
 	}
 
-	public Task UpdateStatusToDone(int orderId, CancellationToken cancellationToken)
+	public Task UpdateStatusToDone(string orderId, CancellationToken cancellationToken)
 	{
 		return _orderUseCase.UpdateStatusToDone(orderId, cancellationToken);
 	}
 
-	public Task UpdateStatusToFinished(int orderId, CancellationToken cancellationToken)
+	public Task UpdateStatusToFinished(string orderId, CancellationToken cancellationToken)
 	{
 		return _orderUseCase.UpdateStatusToFinished(orderId, cancellationToken);
 	}
