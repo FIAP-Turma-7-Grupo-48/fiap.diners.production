@@ -4,7 +4,7 @@ using Domain.Entities.OrderAggregate;
 using Domain.Repositories;
 using UseCase.Dtos.OrderRequest;
 using UseCase.Dtos.OrderRequest.Extensions;
-using UseCase.Services.Interfaces;
+using UseCase.Interfaces;
 
 namespace UseCase;
 
