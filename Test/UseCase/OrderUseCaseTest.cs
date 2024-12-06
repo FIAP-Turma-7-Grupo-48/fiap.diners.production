@@ -2,9 +2,9 @@ using Core.Notifications;
 using Domain.Entities.Enums;
 using Domain.Entities.OrderAggregate;
 using Domain.Repositories;
+using Infrastructure.MongoModels;
 using Moq;
 using UseCase.Dtos.OrderRequest;
-using UseCase.Services;
 using Xunit;
 
 namespace UseCase.OrderTest
@@ -17,12 +17,15 @@ namespace UseCase.OrderTest
         Mock<NotificationContext> _notificationContext;
 
         Order orderResponseMock;
+        Mock<Order> orderMock;
 
         public OrderUseCaseTest()
         {
 
             _orderRepository = new Mock<IOrderRepository>();
             _notificationContext = new Mock<NotificationContext>();
+
+            orderMock = new Mock<Order>();
 
             _orderUseCase = new OrderUseCase(_orderRepository.Object,
                                             _notificationContext.Object
@@ -69,27 +72,40 @@ namespace UseCase.OrderTest
 
             _orderRepository.Setup(x => x.UpdateAsync(It.IsAny<Order>(), default));
 
-            await _orderUseCase.UpdateStatusToPreparing(2, default);
+            await _orderUseCase.UpdateStatusToPreparing("2", default);
         }
 
         [Fact]
         public async void DevePermitirAtualizarStatusPedidoPronto()
         {
-            _orderRepository.Setup(x => x.GetAsync(It.IsAny<string>(), default)).ReturnsAsync(orderResponseMock);
+            Order order = new("1", DateTime.Now, OrderStatus.Preparing)
+            {
+                ExternalOrderId = 2,
+                OrderProducts = new List<OrderProduct> { new() { Name = "Novo hamburguer", ProductType = ProductType.SideDish, Quantity = 1 } }
+            };
+
+            _orderRepository.Setup(x => x.GetAsync(It.IsAny<string>(), default)).ReturnsAsync(order);
 
             _orderRepository.Setup(x => x.UpdateAsync(It.IsAny<Order>(), default));
 
-            await _orderUseCase.UpdateStatusToDone(2, default);
+
+            await _orderUseCase.UpdateStatusToDone("2", default);
         }
 
         [Fact]
         public async void DevePermitirAtualizarStatusPedidoFinalizado()
         {
-            _orderRepository.Setup(x => x.GetAsync(It.IsAny<string>(), default)).ReturnsAsync(orderResponseMock);
+            Order order = new("1", DateTime.Now, OrderStatus.Done)
+            {
+                ExternalOrderId = 2,
+                OrderProducts = new List<OrderProduct> { new() { Name = "Novo hamburguer", ProductType = ProductType.SideDish, Quantity = 1 } }
+            };
+
+            _orderRepository.Setup(x => x.GetAsync(It.IsAny<string>(), default)).ReturnsAsync(order);
 
             _orderRepository.Setup(x => x.UpdateAsync(It.IsAny<Order>(), default));
 
-            await _orderUseCase.UpdateStatusToFinished(2, default);
+            await _orderUseCase.UpdateStatusToFinished("2", default);
         }
 
         [Fact]
@@ -115,7 +131,7 @@ namespace UseCase.OrderTest
             List<Order> lstOrder = new List<Order>();
             lstOrder.Add(orderResponseMock);
 
-            _orderRepository.Setup(x => x.ListAsync(It.IsAny<OrderStatus>(),
+            _orderRepository.Setup(x => x.ListAsync(It.IsAny<IEnumerable<OrderStatus>>(),
                                                     It.IsAny<int>(),
                                                     It.IsAny<int>(),
                                                     default)).ReturnsAsync(lstOrder);
